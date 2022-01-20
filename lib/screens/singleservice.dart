@@ -17,6 +17,7 @@ class SingleServiceScreen extends StatefulWidget {
   final double lat;
   final double long;
   final String street;
+  final String cv;
 
   const SingleServiceScreen(
       {Key key,
@@ -30,7 +31,8 @@ class SingleServiceScreen extends StatefulWidget {
       this.phone,
       this.lat,
       this.long,
-      this.street})
+      this.street,
+      this.cv})
       : super(key: key);
 
   @override
@@ -46,6 +48,12 @@ class _SingleServiceScreenState extends State<SingleServiceScreen> {
         backgroundColor: yellow,
         title: Text(
           widget.nameEn ?? "test",
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context,true);
+          },
+          icon: const Icon(Icons.arrow_back),
         ),
       ),
       body: ListView(
@@ -115,6 +123,21 @@ class _SingleServiceScreenState extends State<SingleServiceScreen> {
               text: widget.street ?? "No Address given",
               maxLines: 5,
               onChanged: (desc) {},
+            ),
+          ),
+          const SizedBox(height: 15),
+          InkWell(
+            onTap: (){
+              launch("http://192.248.144.136/userImage/"+widget.cv);
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: TextFieldWidget(
+                label: 'CV',
+                text: widget.cv ?? "No CV attached",
+                maxLines: 5,
+                onChanged: (desc) {},
+              ),
             ),
           ),
         ],

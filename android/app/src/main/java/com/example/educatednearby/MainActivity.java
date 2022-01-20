@@ -1,4 +1,4 @@
-package com.example.educatednearby;
+package education.com.nearby;
 
 import io.flutter.embedding.android.FlutterActivity;
 

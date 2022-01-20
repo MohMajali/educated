@@ -23,6 +23,13 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   int id = sharedPreferences.getInt("userID");
+
+  @override
+  void initState() {
+    super.initState();
+    funtions.getPer(context);
+    funtions.getLatLag();
+  }
   @override
   Widget build(BuildContext context) {
     CategoryViewModel categoryViewModel = context.watch<CategoryViewModel>();
@@ -41,7 +48,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   if (id == null) {
                     _showAlert("Please log in first");
                   } else {
-                    Navigator.of(context).pop();
+                    // Navigator.of(context).pop();
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -49,7 +56,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   userID: id,
                                   latitude: funtions.lat,
                                   langitude: funtions.long,
-                                )));
+                                ))).then((value) {
+                                  setState(() {
+                                    if(value == true){
+
+                                      categoryViewModel.getCategories();
+                                    } else {
+                                      null;
+                                    }
+                                  });
+                    });
+                    //       print(funtions.long);
                   }
                 },
                 icon: const Icon(Icons.add))
@@ -94,8 +111,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
       SubCategoryViewModel subCategoryViewModel) {
     if (categoryViewModel.loading) {
       return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.1,
-        child: const CircularProgressIndicator(),
+        height: MediaQuery.of(context).size.height ,
+        child: const Center(child:  CircularProgressIndicator()),
       );
     }
 
@@ -123,7 +140,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
               onTap: () async {
                 await subCategoryViewModel.getSubCategories(category.id);
                 // Navigator.of(context).pop();
-                funtions.push(context, const SubCategoryScreen());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SubCategoryScreen(id: category.id,)),
+                ).then((value) {
+                  setState(() {
+                    if(value == true){
+                      categoryViewModel.getCategories();
+                    } else {
+                      null;
+                    }
+                  });
+                });
               },
               child: Container(
                 margin: const EdgeInsets.only(left: 15),

@@ -3,6 +3,7 @@ import 'package:educatednearby/constant/constant_colors.dart';
 import 'package:educatednearby/screens/service.dart';
 import 'package:educatednearby/services/addservice.dart';
 import 'package:educatednearby/view_model/category_view.dart';
+import 'package:educatednearby/view_model/dropcatlist.dart';
 import 'package:educatednearby/view_model/service_view.dart';
 import 'package:educatednearby/view_model/subcat_view.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class _AddServiceState extends State<AddService> {
   @override
   Widget build(BuildContext context) {
     ServiceViewModel serviceViewModel = context.watch<ServiceViewModel>();
-    CategoryViewModel categoryViewModel = context.watch<CategoryViewModel>();
+    CategoryListViewModel categoryListViewModel = context.watch<CategoryListViewModel>();
     SubCategoryViewModel subCategoryViewModel =
         context.watch<SubCategoryViewModel>();
     return Scaffold(
@@ -53,11 +54,11 @@ class _AddServiceState extends State<AddService> {
           backgroundColor: yellow,
           leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ServiceScreen()),
-              );
+              Navigator.pop(context,true);
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const ServiceScreen()),
+              // );
             },
             icon: const Icon(Icons.arrow_back),
           ),
@@ -68,11 +69,11 @@ class _AddServiceState extends State<AddService> {
               height: 10,
             ),
             _serviceUi(
-                serviceViewModel, categoryViewModel, subCategoryViewModel),
+                serviceViewModel, categoryListViewModel, subCategoryViewModel),
             const SizedBox(
               height: 10,
             ),
-            _categoryUi(categoryViewModel, subCategoryViewModel),
+            _categoryUi(categoryListViewModel, subCategoryViewModel),
             const SizedBox(
               height: 10,
             ),
@@ -87,7 +88,7 @@ class _AddServiceState extends State<AddService> {
 
   _serviceUi(
       ServiceViewModel serviceViewModel,
-      CategoryViewModel categoryViewModel,
+      CategoryListViewModel categoryViewModel,
       SubCategoryViewModel subCategoryViewModel) {
     if (serviceViewModel.loading) {
       return SizedBox(
@@ -123,8 +124,7 @@ class _AddServiceState extends State<AddService> {
                         _cat = null;
                         _subcat = null;
 
-                        // categoryViewModel.getCategories(_sevice);
-                        // insertBrand(proID, _brand);
+                        categoryViewModel.getCategories(_sevice);
                       });
                     },
                     items: serviceViewModel.services.map((service) {
@@ -144,7 +144,7 @@ class _AddServiceState extends State<AddService> {
         ));
   }
 
-  _categoryUi(CategoryViewModel categoryViewModel,
+  _categoryUi(CategoryListViewModel categoryViewModel,
       SubCategoryViewModel subCategoryViewModel) {
     if (categoryViewModel.loading) {
       return SizedBox(
@@ -292,7 +292,7 @@ class _AddServiceState extends State<AddService> {
             padding: EdgeInsets.only(right: 200),
             child: Text(
               "optional*",
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(color: Colors.red),
             ),
           ),
           Padding(
@@ -464,7 +464,7 @@ class _AddServiceState extends State<AddService> {
             padding: EdgeInsets.only(right: 200),
             child: Text(
               "optional*",
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(color: Colors.red),
             ),
           ),
           Padding(
@@ -530,7 +530,7 @@ class _AddServiceState extends State<AddService> {
                       widget.langitude,
                       "hi",
                       context);
-                  print(_subcat);
+                  print(widget.latitude);
                 } else {
                   Fluttertoast.showToast(
                       msg: "Please Select Category",

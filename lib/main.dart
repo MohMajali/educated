@@ -9,6 +9,7 @@ import 'package:educatednearby/view_model/banner_view.dart';
 import 'package:educatednearby/view_model/category_view.dart';
 import 'package:educatednearby/view_model/chance_view.dart';
 import 'package:educatednearby/view_model/cv_view.dart';
+import 'package:educatednearby/view_model/dropcatlist.dart';
 import 'package:educatednearby/view_model/news_view.dart';
 import 'package:educatednearby/view_model/service_view.dart';
 import 'package:educatednearby/view_model/store_view.dart';
@@ -58,7 +59,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => ChanceViewModel()),
         ChangeNotifierProvider(create: (_) => CategoryViewModel()),
         ChangeNotifierProvider(create: (_) => SubCategoryViewModel()),
-        ChangeNotifierProvider(create: (_) => CvViewModel())
+        ChangeNotifierProvider(create: (_) => CvViewModel()),
+    ChangeNotifierProvider(create: (_) => CategoryListViewModel())
       ],
       child: MaterialApp(
         localizationsDelegates: const [

@@ -3,12 +3,13 @@ import 'package:educatednearby/fun/goto.dart';
 import 'package:educatednearby/screens/singleservice.dart';
 import 'package:educatednearby/view_model/store_view.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/src/provider.dart';
 
 class StoreScreen extends StatefulWidget {
-  final int distance;
-  const StoreScreen({Key key, this.distance}) : super(key: key);
+  final int distance,id;
+  const StoreScreen({Key key, this.distance,this.id}) : super(key: key);
 
   @override
   _StoreScreenState createState() => _StoreScreenState();
@@ -18,6 +19,13 @@ class _StoreScreenState extends State<StoreScreen> {
   double distance;
   List<Widget> stores = new List<Widget>();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    funtions.getLatLag();
+  }
   @override
   Widget build(BuildContext context) {
     StoreViewModel storeViewModel = context.watch<StoreViewModel>();
@@ -28,6 +36,12 @@ class _StoreScreenState extends State<StoreScreen> {
           title: const Text("Stores"),
           backgroundColor: yellow,
           centerTitle: true,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context,true);
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -44,11 +58,10 @@ class _StoreScreenState extends State<StoreScreen> {
   }
 
   _storeUi(StoreViewModel storeViewModel) {
-    print(widget.distance);
     if (storeViewModel.loading) {
       return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.1,
-        child: const CircularProgressIndicator(),
+        height: MediaQuery.of(context).size.height ,
+        child: const Center(child:  CircularProgressIndicator()),
       );
     }
     if (storeViewModel.store.isEmpty) {
@@ -65,6 +78,7 @@ class _StoreScreenState extends State<StoreScreen> {
       double distanceInKilo = indistance / 1000;
 
       if (distanceInKilo <= widget.distance) {
+        // print(store.nameEn);
         stores.add(Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
@@ -72,7 +86,11 @@ class _StoreScreenState extends State<StoreScreen> {
               store.nameEn,
               style: const TextStyle(color: yellow, fontSize: 20),
             ),
-            onTap: () {
+            onTap: () async{
+              List<Placemark> placemarks =
+                  await placemarkFromCoordinates(
+                  store.latitude, store.longitude);
+              String street = placemarks[0].street;
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -85,8 +103,19 @@ class _StoreScreenState extends State<StoreScreen> {
                           descAr: store.descAr,
                           lat: store.latitude,
                           long: store.longitude,
+                      street: street.toString(),
+                      cv: store.resume,
                         )),
-              );
+              ).then((value) {
+                setState(() {
+                  if(value == true){
+                    storeViewModel.getStore(widget.id);
+                  } else {
+                    null;
+                  }
+
+                });
+              });
             },
           ),
         ));

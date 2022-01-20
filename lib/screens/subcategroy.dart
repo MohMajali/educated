@@ -12,7 +12,8 @@ import 'package:numberpicker/numberpicker.dart';
 import 'package:provider/src/provider.dart';
 
 class SubCategoryScreen extends StatefulWidget {
-  const SubCategoryScreen({Key key}) : super(key: key);
+  final int id;
+  const SubCategoryScreen({Key key,this.id}) : super(key: key);
 
   @override
   _SubCategoryScreenState createState() => _SubCategoryScreenState();
@@ -33,6 +34,12 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
           title: const Text("Subcategory"),
           backgroundColor: yellow,
           centerTitle: true,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context,true);
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -71,8 +78,8 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
       StoreViewModel storeViewModel) {
     if (subCategoryViewModel.loading) {
       return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.1,
-        child: const CircularProgressIndicator(),
+        height: MediaQuery.of(context).size.height ,
+        child: const Center(child:  CircularProgressIndicator()),
       );
     }
 
@@ -109,7 +116,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                   showModalBottomSheet(
                     context: context,
                     builder: ((builder) => bottomSheetLocation(
-                        "Choose option", storeViewModel, subCategory.id)),
+                        "Choose option", storeViewModel, subCategory.id,subCategoryViewModel)),
                   );
                 });
               },
@@ -127,7 +134,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
   }
 
   Widget bottomSheetLocation(
-      String text, StoreViewModel storeViewModel, int id) {
+      String text, StoreViewModel storeViewModel, int id,SubCategoryViewModel subCategoryViewModel) {
     return Container(
       height: 100.0,
       width: MediaQuery.of(context).size.width,
@@ -151,13 +158,20 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
             FlatButton.icon(
               icon: const Icon(Icons.map),
               onPressed: () async {
-                // await storeViewModel.getStore(id);
-                funtions.push(
-                    context,
-                    MapScreen(
-                      id: id,
-                      distances: _number,
-                    ));
+                await storeViewModel.getStore(id);
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MapScreen(distances: _number,id: id,)),
+                ).then((value) {
+                  setState(() {
+                    if(value == true){
+                      // subCategoryViewModel.getSubCategories(widget.id);
+                    } else {
+                      null;
+                    }
+                  });
+                });
               },
               label: const Text("Maps",
                   style: TextStyle(
@@ -168,11 +182,19 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
               icon: const Icon(Icons.camera_alt),
               onPressed: () async {
                 await storeViewModel.getStore(id);
-                funtions.push(
-                    context,
-                    StoreScreen(
-                      distance: _number,
-                    ));
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => StoreScreen(distance: _number,id: id,)),
+                ).then((value) {
+                  setState(() {
+                    if(value == true){
+                      // subCategoryViewModel.getSubCategories(widget.id);
+                    } else {
+                      null;
+                    }
+                  });
+                });
               },
               label: const Text("ListView",
                   style: TextStyle(

@@ -90,9 +90,18 @@ class _MapScreenState extends State<MapScreen> {
         backgroundColor: yellow,
         centerTitle: false,
         title: const Text('Maps'),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context,true);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
       ),
       body: _initialCamera == null
-          ? const CircularProgressIndicator()
+          ?   SizedBox(
+        height: MediaQuery.of(context).size.height ,
+    child: const Center(child:  CircularProgressIndicator()),
+    )
           : GoogleMap(
               initialCameraPosition: _initialCamera,
               onMapCreated: (GoogleMapController googleMap) {
@@ -104,33 +113,31 @@ class _MapScreenState extends State<MapScreen> {
               markers: myMarkers,
               circles: Set.of((circle != null) ? [circle] : []),
             ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     getCurrentLocation();
-      //   },
-      //   child: const Icon(Icons.location_searching),
-      // ),
     );
   }
 
   _setMakers(StoreViewModel storeViewModel) async {
-    await storeViewModel.getStore(id);
+    // await storeViewModel.getStore(id);
     if (storeViewModel.loading) {
-      print("HIIII");
+      return SizedBox(
+        height: MediaQuery.of(context).size.height ,
+        child: const Center(child:  CircularProgressIndicator()),
+      );
     }
 
     if (storeViewModel.store.isEmpty) {
     } else {
       setState(() {
-        // _markers.clear();
+        myMarkers.clear();
         for (final store in storeViewModel.store) {
-          // print(store.nameEn + "Hqqqqqq");
+
           distance = Geolocator.distanceBetween(
               lat, long, store.latitude, store.longitude);
           int indistance = distance.round().toInt();
           double distanceInKilo = indistance / 1000;
 
           if (distanceInKilo <= widget.distances) {
+            // print(store.nameEn + "  Hqqqqqq");
             myMarkers.add(Marker(
                 markerId: MarkerId(store.nameEn),
                 position: LatLng(store.latitude, store.longitude),
@@ -142,28 +149,36 @@ class _MapScreenState extends State<MapScreen> {
                           await placemarkFromCoordinates(
                               store.latitude, store.longitude);
                       String street = placemarks[0].street;
-                      funtions.push(
-                          context,
-                          SingleServiceScreen(
-                            logo: store.logo,
-                            nameEn: store.nameEn,
-                            email: store.email,
-                            phone: store.phone,
-                            descEn: store.descEn,
-                            descAr: store.descAr,
-                            lat: store.latitude,
-                            long: store.longitude,
-                            street: street.toString(),
-                          ));
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SingleServiceScreen(
+                              logo: store.logo,
+                              nameEn: store.nameEn,
+                              email: store.email,
+                              phone: store.phone,
+                              descEn: store.descEn,
+                              descAr: store.descAr,
+                              lat: store.latitude,
+                              long: store.longitude,
+                              street: street.toString(),
+                              cv: store.resume,
+                            )),
+                      ).then((value) {
+                        setState(() {
+                          if(value == true){
+                            storeViewModel.getStore(widget.id);
+                          } else {
+                            null;
+                          }
+
+                        });
+                      });
                     })));
           } else {
             print('NOPEEEEEEE');
           }
-
-          // print("HIIIII"+myMarkers.toString());
-          // print("ALOOOOOOO"+lat.toString() + " " + long.toString() + ' Store' + ' ' + store.latitude.toString());
-
-          // print("distance" + (indistance / 1000).toString());
 
         }
       });
