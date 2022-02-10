@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import '../repo.dart';
+import 'package:educatednearby/fun/goto.dart';
 
 class AddServiceApi {
   static Future<Object> addService(
@@ -19,6 +20,7 @@ class AddServiceApi {
       double late,
       double lang,
       String logo,
+      String decode,
       BuildContext context) async {
     try {
       String url = 'http://192.248.144.136/api/insertStore.php';
@@ -34,7 +36,8 @@ class AddServiceApi {
         "userId": userId.toString(),
         "late": late.toString(),
         "lang": lang.toString(),
-        "logo": logo
+        "logo": logo ?? "",
+        "imageDecode": decode ?? ""
       });
 
       var json = jsonDecode(response.body);
@@ -50,13 +53,16 @@ class AddServiceApi {
             fontSize: 16.0);
         return Success(response: json['message'].toString());
       }
+      funtions.message("No Internet Connection");
       return Failure(code: 100, errorResponse: "Invalid response");
     } on HttpException {
+      funtions.message("No Internet Connection");
       return Failure(code: 101, errorResponse: "No Internet");
     } on FormatException {
+      funtions.message("No Internet Connection");
       return Failure(code: 102, errorResponse: "Invalid format");
     } catch (ex) {
-      print(ex);
+      funtions.message("No Internet Connection");
       return Failure(code: 103, errorResponse: "Unkown Error");
     }
   }

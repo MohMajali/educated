@@ -1,15 +1,19 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:educatednearby/constant/components.dart';
 import 'package:educatednearby/constant/constant_colors.dart';
-import 'package:educatednearby/screens/service.dart';
+import 'package:educatednearby/fun/goto.dart';
+import 'package:educatednearby/package/applocal.dart';
 import 'package:educatednearby/services/addservice.dart';
 import 'package:educatednearby/view_model/category_view.dart';
-import 'package:educatednearby/view_model/dropcatlist.dart';
-import 'package:educatednearby/view_model/service_view.dart';
 import 'package:educatednearby/view_model/subcat_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/src/provider.dart';
+
+import '../main.dart';
 
 class AddService extends StatefulWidget {
   final int userID;
@@ -26,6 +30,7 @@ class _AddServiceState extends State<AddService> {
   String _sevice;
   String _cat;
   String _subcat;
+  var lang = sharedPreferences.getString("lang");
 
   final _keynameEn = GlobalKey<FormState>();
   final _keynameAr = GlobalKey<FormState>();
@@ -41,35 +46,79 @@ class _AddServiceState extends State<AddService> {
   TextEditingController storeAddress = TextEditingController();
   TextEditingController storeDescEn = TextEditingController();
   TextEditingController storeDescAr = TextEditingController();
+
+  File images;
+  String image;
+  final imagePicker = ImagePicker();
+  String imageDecode;
+
+  Future getImage(ImageSource src) async {
+    final pickedFile = await imagePicker.pickImage(source: src);
+
+    setState(() {
+      if (pickedFile != null) {
+        images = File(pickedFile.path);
+      } else {}
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    ServiceViewModel serviceViewModel = context.watch<ServiceViewModel>();
-    CategoryListViewModel categoryListViewModel = context.watch<CategoryListViewModel>();
+    // ServiceViewModel serviceViewModel = context.watch<ServiceViewModel>();
+    CategoryViewModel categoryListViewModel =
+        context.watch<CategoryViewModel>();
     SubCategoryViewModel subCategoryViewModel =
         context.watch<SubCategoryViewModel>();
     return Scaffold(
-        backgroundColor: Colors.grey[500],
+        backgroundColor: Colors.grey[900],
         appBar: AppBar(
-          title: const Text("Add Service"),
+          title: Text(getLang(context, "AddService")),
           backgroundColor: yellow,
           leading: IconButton(
             onPressed: () {
-              Navigator.pop(context,true);
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const ServiceScreen()),
-              // );
+              Navigator.pop(context, true);
             },
             icon: const Icon(Icons.arrow_back),
           ),
         ),
         body: ListView(
           children: [
+            Center(
+                child: Stack(
+              children: [
+                CircleAvatar(
+                  radius: 65,
+                  backgroundImage: images == null
+                      ? const AssetImage("assets/images/userdefault.jpg")
+                      : FileImage(File(images.path)),
+                ),
+                Positioned(
+                    bottom: 0.0,
+                    right: 0.0,
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () async {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: ((builder) => bottomSheetUser()),
+                            );
+                          },
+                          child: const Icon(
+                            Icons.camera_alt,
+                            color: yellow,
+                            size: 30.0,
+                          ),
+                        )
+                      ],
+                    ))
+              ],
+            )),
             const SizedBox(
               height: 10,
             ),
-            _serviceUi(
-                serviceViewModel, categoryListViewModel, subCategoryViewModel),
+            // _serviceUi(
+            //     serviceViewModel, categoryListViewModel, subCategoryViewModel),
             const SizedBox(
               height: 10,
             ),
@@ -86,67 +135,69 @@ class _AddServiceState extends State<AddService> {
         ));
   }
 
-  _serviceUi(
-      ServiceViewModel serviceViewModel,
-      CategoryListViewModel categoryViewModel,
-      SubCategoryViewModel subCategoryViewModel) {
-    if (serviceViewModel.loading) {
-      return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.1,
-        child: const CircularProgressIndicator(),
-      );
-    }
-
+  Widget bottomSheetUser() {
     return Container(
-        padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * .05, 0,
-            MediaQuery.of(context).size.width * .05, 0),
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Expanded(
-              child: DropdownButtonHideUnderline(
-                child: ButtonTheme(
-                  alignedDropdown: true,
-                  child: DropdownButton<String>(
-                    value: _sevice,
-                    iconSize: 30,
-                    icon: const Icon(Icons.add),
-                    style: const TextStyle(
-                      color: Colors.black54,
-                      fontSize: 16,
-                    ),
-                    hint:
-                        const Text("Service", style: TextStyle(color: yellow)),
-                    onChanged: (String newValue) {
-                      setState(() {
-                        _sevice = newValue;
-                        _cat = null;
-                        _subcat = null;
-
-                        categoryViewModel.getCategories(_sevice);
-                      });
-                    },
-                    items: serviceViewModel.services.map((service) {
-                          return DropdownMenuItem(
-                              value: service.id.toString(),
-                              child: Text(
-                                service.nameEn,
-                                style: const TextStyle(color: yellow),
-                              ));
-                        }).toList() ??
-                        [],
-                  ),
-                ),
-              ),
+      height: 100.0,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 20,
+      ),
+      child: Column(
+        children: <Widget>[
+          Text(
+            getLang(context, "ProfilePicture"),
+            style: const TextStyle(
+              fontSize: 20.0,
+              fontFamily: 'Simpletax',
             ),
-          ],
-        ));
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            FlatButton.icon(
+              icon: const Icon(Icons.photo),
+              onPressed: () async {
+                getImage(ImageSource.gallery);
+              },
+              label: Text(getLang(context, "Gallery"),
+                  style: const TextStyle(
+                    fontFamily: 'Simpletax',
+                  )),
+            ),
+            FlatButton.icon(
+              icon: const Icon(Icons.camera_alt),
+              onPressed: () async {
+                getImage(ImageSource.camera);
+              },
+              label: Text(getLang(context, "Camera"),
+                  style: const TextStyle(
+                    fontFamily: 'Simpletax',
+                  )),
+            ),
+          ])
+        ],
+      ),
+    );
   }
 
-  _categoryUi(CategoryListViewModel categoryViewModel,
+  Future<void> imageBase64() async {
+    var date = DateTime.now();
+    if (images != null) {
+      image = widget.userID.toString() +
+          date.second.toString() +
+          '.' +
+          images.path.split('.').last;
+
+      imageDecode = base64Encode(images.readAsBytesSync());
+      return [image, imageDecode];
+    }
+  }
+
+  _categoryUi(CategoryViewModel categoryListViewModel,
       SubCategoryViewModel subCategoryViewModel) {
-    if (categoryViewModel.loading) {
+    if (categoryListViewModel.loading) {
       return SizedBox(
         height: MediaQuery.of(context).size.height * 0.1,
         child: const CircularProgressIndicator(),
@@ -172,23 +223,27 @@ class _AddServiceState extends State<AddService> {
                       color: Colors.black54,
                       fontSize: 16,
                     ),
-                    hint:
-                        const Text("Category", style: TextStyle(color: yellow)),
-                    onChanged: (String newValue) {
+                    hint: Text(getLang(context, "Service"),
+                        style: const TextStyle(color: yellow)),
+                    onChanged: (String newValue) async {
                       setState(() {
                         _cat = newValue;
                         _subcat = null;
-
-                        subCategoryViewModel.getSubCategories(_cat);
                       });
+                      await subCategoryViewModel.getSubCategories(_cat);
                     },
-                    items: categoryViewModel.category.map((category) {
+                    items: categoryListViewModel.category.map((category) {
                           return DropdownMenuItem(
                               value: category.id.toString(),
-                              child: Text(
-                                category.nameEn,
-                                style: const TextStyle(color: yellow),
-                              ));
+                              child: lang == 'en'
+                                  ? Text(
+                                      category.nameEn,
+                                      style: const TextStyle(color: yellow),
+                                    )
+                                  : Text(
+                                      category.nameAr,
+                                      style: const TextStyle(color: yellow),
+                                    ));
                         }).toList() ??
                         [],
                   ),
@@ -226,7 +281,7 @@ class _AddServiceState extends State<AddService> {
                       color: Colors.black54,
                       fontSize: 16,
                     ),
-                    hint: const Text("Sub Category",
+                    hint: Text(getLang(context, "Subcategory"),
                         style: TextStyle(color: yellow)),
                     onChanged: (String newValue) {
                       setState(() {
@@ -238,10 +293,15 @@ class _AddServiceState extends State<AddService> {
                     items: subCategoryViewModel.subCategory.map((subCategory) {
                           return DropdownMenuItem(
                               value: subCategory.id.toString(),
-                              child: Text(
-                                subCategory.nameEn,
-                                style: const TextStyle(color: yellow),
-                              ));
+                              child: lang == 'en'
+                                  ? Text(
+                                      subCategory.nameEn,
+                                      style: const TextStyle(color: yellow),
+                                    )
+                                  : Text(
+                                      subCategory.nameAr,
+                                      style: const TextStyle(color: yellow),
+                                    ));
                         }).toList() ??
                         [],
                   ),
@@ -256,7 +316,7 @@ class _AddServiceState extends State<AddService> {
     return Container(
       padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * .05, 0,
           MediaQuery.of(context).size.width * .05, 0),
-      color: Colors.grey[500],
+      color: Colors.grey[900],
       child: Column(
         children: [
           Padding(
@@ -272,13 +332,13 @@ class _AddServiceState extends State<AddService> {
                 keyboardType: TextInputType.text,
                 validator: (val) {
                   if (val.isEmpty) {
-                    return "Field Required";
+                    return getLang(context, "FieldRequired");
                   }
                   return null;
                 },
                 decoration: secoundaryInputDecoration(
                     context,
-                    "Name in English",
+                    getLang(context, "NameinEnglish"),
                     null,
                     const Icon(
                       Icons.store,
@@ -288,11 +348,11 @@ class _AddServiceState extends State<AddService> {
             ),
           ),
           sizedBoxHomePage(10),
-          const Padding(
-            padding: EdgeInsets.only(right: 200),
+          Padding(
+            padding: const EdgeInsets.only(right: 200),
             child: Text(
-              "optional*",
-              style: TextStyle(color: Colors.red),
+              getLang(context, "optional*"),
+              style: const TextStyle(color: Colors.red),
             ),
           ),
           Padding(
@@ -308,13 +368,13 @@ class _AddServiceState extends State<AddService> {
                 keyboardType: TextInputType.text,
                 validator: (val) {
                   if (val.isEmpty) {
-                    return "Field Required";
+                    return getLang(context, "FieldRequired");
                   }
                   return null;
                 },
                 decoration: secoundaryInputDecoration(
                     context,
-                    "Name in Arabic",
+                    getLang(context, "NameinArabic"),
                     null,
                     const Icon(
                       Icons.store,
@@ -341,15 +401,15 @@ class _AddServiceState extends State<AddService> {
                 ],
                 validator: (val) {
                   if (val.isEmpty) {
-                    return "Field Required";
+                    return getLang(context, "FieldRequired");
                   } else if (val.length != 10) {
-                    return "Phone number mustbe 10 digits";
+                    return getLang(context, "Phonenumbermustbe10digits");
                   }
                   return null;
                 },
                 decoration: secoundaryInputDecoration(
                     context,
-                    "Phone Number",
+                    getLang(context, "phone"),
                     null,
                     const Icon(
                       Icons.phone_android,
@@ -375,12 +435,12 @@ class _AddServiceState extends State<AddService> {
                       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                   RegExp regex = new RegExp(pattern);
                   if (val.isEmpty) {
-                    return "Field Required";
+                    return getLang(context, "FieldRequired");
                   }
                   if (val.length > 50) {
-                    return "validate less 50";
+                    return getLang(context, "validateless50");
                   } else if (!regex.hasMatch(val)) {
-                    return "Enter valid email";
+                    return getLang(context, "Entervalidemail");
                   } else {
                     storeMail.text = val;
                   }
@@ -388,7 +448,7 @@ class _AddServiceState extends State<AddService> {
                 },
                 decoration: secoundaryInputDecoration(
                     context,
-                    "Store/User Email",
+                    getLang(context, "Email"),
                     null,
                     const Icon(
                       Icons.mail,
@@ -411,7 +471,7 @@ class _AddServiceState extends State<AddService> {
                 keyboardType: TextInputType.text,
                 validator: (val) {
                   if (val.isEmpty) {
-                    return "Field Required";
+                    return getLang(context, "FieldRequired");
                   } else {
                     storeAddress.text = val;
                   }
@@ -419,7 +479,7 @@ class _AddServiceState extends State<AddService> {
                 },
                 decoration: secoundaryInputDecoration(
                     context,
-                    "Store/User Address",
+                    getLang(context, "Address"),
                     null,
                     const Icon(
                       Icons.location_city,
@@ -439,32 +499,27 @@ class _AddServiceState extends State<AddService> {
                 ),
                 cursorColor: blue,
                 controller: storeDescEn,
+                maxLines: 10,
                 keyboardType: TextInputType.text,
                 validator: (val) {
                   if (val.isEmpty) {
-                    return "Field Required";
+                    return getLang(context, "FieldRequired");
                   } else {
                     storeDescEn.text = val;
                   }
                   return null;
                 },
                 decoration: secoundaryInputDecoration(
-                    context,
-                    "Store/User Description",
-                    null,
-                    const Icon(
-                      Icons.location_city,
-                      color: yellow,
-                    )),
+                    context, getLang(context, "Description"), null, null),
               ),
             ),
           ),
           sizedBoxHomePage(10),
-          const Padding(
-            padding: EdgeInsets.only(right: 200),
+          Padding(
+            padding: const EdgeInsets.only(right: 200),
             child: Text(
-              "optional*",
-              style: TextStyle(color: Colors.red),
+              getLang(context, "optional*"),
+              style: const TextStyle(color: Colors.red),
             ),
           ),
           Padding(
@@ -477,23 +532,18 @@ class _AddServiceState extends State<AddService> {
                 ),
                 cursorColor: blue,
                 controller: storeDescAr,
+                maxLines: 10,
                 keyboardType: TextInputType.text,
                 validator: (val) {
                   if (val.isEmpty) {
-                    return "Field Required";
+                    return getLang(context, "FieldRequired");
                   } else {
                     storeDescEn.text = val;
                   }
                   return null;
                 },
-                decoration: secoundaryInputDecoration(
-                    context,
-                    "Description(Arabic)",
-                    null,
-                    const Icon(
-                      Icons.location_city,
-                      color: yellow,
-                    )),
+                decoration: secoundaryInputDecoration(context,
+                    getLang(context, "Description(Arabic)"), null, null),
               ),
             ),
           ),
@@ -509,13 +559,15 @@ class _AddServiceState extends State<AddService> {
                 String address = storeAddress.text;
                 String descEn = storeDescEn.text;
                 String descAr = storeDescAr.text;
+                await imageBase64();
 
                 if (_keynameEn.currentState.validate() &&
                     _keyPhone.currentState.validate() &&
                     _keyMail.currentState.validate() &&
                     _keyAddress.currentState.validate() &&
                     _keydescEn.currentState.validate() &&
-                    _subcat != null) {
+                    _subcat != null &&
+                    _cat != null) {
                   await AddServiceApi.addService(
                       _subcat,
                       nameEn,
@@ -526,14 +578,14 @@ class _AddServiceState extends State<AddService> {
                       descEn,
                       descAr,
                       widget.userID,
-                      widget.latitude,
-                      widget.langitude,
-                      "hi",
+                      funtions.lat,
+                      funtions.long,
+                      image,
+                      imageDecode,
                       context);
-                  print(widget.latitude);
-                } else {
+                } else if (_cat == null || _subcat == null) {
                   Fluttertoast.showToast(
-                      msg: "Please Select Category",
+                      msg: getLang(context, "PleaseSelectCategory"),
                       toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.BOTTOM,
                       timeInSecForIosWeb: 1,
@@ -542,7 +594,7 @@ class _AddServiceState extends State<AddService> {
                       fontSize: 16.0);
                 }
               },
-              child: submit(context, "Submit"),
+              child: submit(context, getLang(context, "submit"), yellow),
             ),
           ),
           const SizedBox(
