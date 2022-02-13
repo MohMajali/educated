@@ -1,5 +1,6 @@
 import 'package:educatednearby/constant/configirations.dart';
 import 'package:educatednearby/constant/constant_colors.dart';
+import 'package:educatednearby/package/applocal.dart';
 import 'package:flutter/material.dart';
 
 class SplashContent extends StatelessWidget {
@@ -19,10 +20,10 @@ class SplashContent extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                text: "Educated Nearby",
+                text: getLang(context, "EducatedNearby"),
                 style: TextStyle(
                     fontSize: getProportionateScreenWidth(45),
-                    color: yellow,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Regular'),
               ),

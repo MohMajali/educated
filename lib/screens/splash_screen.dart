@@ -1,11 +1,17 @@
+import 'dart:io';
 import 'package:educatednearby/constant/components.dart';
 import 'package:educatednearby/constant/configirations.dart';
 import 'package:educatednearby/constant/constant_colors.dart';
-import 'package:educatednearby/screens/home_page.dart';
-import 'package:educatednearby/screens/service.dart';
+import 'package:educatednearby/models/store.dart';
+import 'package:educatednearby/package/applocal.dart';
+import 'package:educatednearby/screens/navbar.dart';
+import 'package:educatednearby/screens/singleservice.dart';
 import 'package:educatednearby/screens/splach_content.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'package:educatednearby/fun/goto.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -13,7 +19,7 @@ class SplashScreen extends StatelessWidget {
     String text = "help";
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: brown,
+      backgroundColor: yellow,
       body: Body(),
     );
   }
@@ -28,21 +34,96 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   int currentPage = 0;
+  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
   List<Map<String, String>> splashData = [
     {
-      "text": "Welcome to Creative Store, Let’s shop!",
-      "image": "assets/images/picweb1.png"
-    },
-    {
-      "text": "نحن نساعدك للتواصل مع المحلات",
-      "image": "assets/images/picweb2.png"
-    },
-    {
-      "text": "We show the easy way to shop.",
-      "image": "assets/images/picweb3.png"
-    },
-    {"text": "Just stay at home with us", "image": "assets/images/picweb4.png"},
+      "text": "Welcome to Education NearBy",
+      "image": "assets/images/education.png"
+    }
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    iniDynamicLink();
+  }
+
+  List<Store> singleService = [];
+
+  Future<void> iniDynamicLink() async {
+    final PendingDynamicLinkData data =
+        await FirebaseDynamicLinks.instance.getInitialLink();
+
+    if (data != null) {
+      if (data.link.pathSegments.contains('SingleServiceScreen')) {
+        String id = data.link.queryParameters['serviceid'];
+        await getService(id).then((value) {
+          setState(() {
+            singleService = value;
+          });
+        });
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SingleServiceScreen(
+                    serviceId: id,
+                    singleService: singleService,
+                  )),
+        );
+      }
+    }
+
+    dynamicLinks.onLink.listen((dynamicLinkData) async {
+      // Navigator.pushNamed(context, dynamicLinkData.link.path);
+      final Uri deeplink = dynamicLinkData.link;
+      if (deeplink != null) {
+        String id = deeplink.queryParameters['id'];
+        await getService(id).then((value) {
+          setState(() {
+            singleService = value;
+          });
+        });
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SingleServiceScreen(
+                    serviceId: id,
+                    singleService: singleService,
+                  )),
+        );
+        // print(deeplink.queryParameters['id']);
+      }
+    }).onError((error) {
+      print('onLink error');
+      print(error.message);
+    });
+    // return route;
+  }
+
+  static Future<List<Store>> getService(var id) async {
+    try {
+      String url =
+          'http://192.248.144.136/api/signleService.php?id=' + id.toString();
+      var response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final List<Store> singleServiceList = storeFromJson(response.body);
+        return singleServiceList;
+      }
+      funtions.message("No Internet Connection");
+      return List<Store>();
+    } on HttpException {
+      funtions.message("No Internet Connection");
+      return List<Store>();
+    } on FormatException {
+      funtions.message("No Internet Connection");
+      return List<Store>();
+    } catch (ex) {
+      funtions.message("No Internet Connection");
+      return List<Store>();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,12 +164,10 @@ class _BodyState extends State<Body> {
                     ),
                     Spacer(),
                     SplahButton(
-                      text: "Continue",
+                      text: getLang(context, "Continue"),
                       press: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ServiceScreen()));
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => NavBar()));
                       },
                     ),
                     Spacer(),
@@ -109,7 +188,7 @@ class _BodyState extends State<Body> {
       height: 6,
       width: currentPage == index ? 20 : 6,
       decoration: BoxDecoration(
-        color: currentPage == index ? blue : Colors.white,
+        color: currentPage == index ? null : null,
         borderRadius: BorderRadius.circular(3),
       ),
     );
@@ -134,7 +213,7 @@ class SplahButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         // color: Color(0xFFF27E63),
         // color: Colors.black,
-        color: yellow,
+        color: Colors.black,
         onPressed: press,
         child: Text(
           text,

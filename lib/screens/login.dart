@@ -1,5 +1,6 @@
 import 'package:educatednearby/constant/components.dart';
 import 'package:educatednearby/constant/constant_colors.dart';
+import 'package:educatednearby/package/applocal.dart';
 import 'package:educatednearby/services/login.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.grey[500],
+      backgroundColor: yellow,
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: double.infinity,
@@ -37,17 +38,17 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
-                  children: const [
+                  children: [
                     Text(
-                      "Login",
-                      style: TextStyle(fontSize: 30, color: black),
+                      getLang(context, "Login"),
+                      style: const TextStyle(fontSize: 30, color: black),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Text(
-                      "Login to your account",
-                      style: TextStyle(fontSize: 15, color: yellow),
+                      getLang(context, "toyouraccount"),
+                      style: const TextStyle(fontSize: 15, color: black),
                     )
                   ],
                 ),
@@ -59,8 +60,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           context,
                           _keyEmail,
                           emailOrPhoneCrl,
-                          "Email",
-                          "error",
+                          getLang(context, "Email"),
+                          getLang(context, "error"),
                           const Icon(
                             Icons.person,
                             color: Colors.white,
@@ -73,8 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           context,
                           _keyPassword,
                           passwordCrl,
-                          "Password",
-                          "error",
+                          getLang(context, "Password"),
+                          getLang(context, "error"),
                           const Icon(
                             Icons.lock,
                             color: Colors.white,
@@ -121,9 +122,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(50),
                       ),
-                      child: const Text(
-                        "Login",
-                        style: TextStyle(
+                      child: Text(
+                        getLang(context, "Login"),
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
                           color: Colors.white,
@@ -135,17 +136,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text(
-                      "Don't have an account?",
-                      style: TextStyle(color: yellow, fontSize: 20),
+                    Text(
+                      getLang(context, "Donthaveanaccount"),
+                      style: const TextStyle(color: black, fontSize: 20),
                     ),
                     InkWell(
                       onTap: () {
                         Navigator.pushNamed(context, 'Signup');
                       },
-                      child: const Text(
-                        " Sign up",
-                        style: TextStyle(
+                      child: Text(
+                        getLang(context, "signup"),
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 18,
                         ),

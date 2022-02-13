@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:educatednearby/constant/components.dart';
 import 'package:educatednearby/constant/constant_colors.dart';
 import 'package:educatednearby/constant/urls.dart';
+import 'package:educatednearby/package/applocal.dart';
 import 'package:educatednearby/services/updates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-
 import '../main.dart';
 import '../repo.dart';
 
@@ -83,15 +83,17 @@ class _ProfileAccountState extends State<ProfileAccount> {
     super.initState();
     getUserImage();
     putVars();
+    print(phone);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[500],
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         backgroundColor: yellow,
-        title: const Text("Account", style: TextStyle(color: Colors.white)),
+        title: Text(getLang(context, "profile"),
+            style: const TextStyle(color: Colors.white)),
       ),
       body: ListView(
         children: [
@@ -121,7 +123,7 @@ class _ProfileAccountState extends State<ProfileAccount> {
                         },
                         child: const Icon(
                           Icons.camera_alt,
-                          color: black,
+                          color: yellow,
                           size: 30.0,
                         ),
                       )
@@ -147,9 +149,9 @@ class _ProfileAccountState extends State<ProfileAccount> {
                 ],
                 validator: (val) {
                   if (val.isEmpty) {
-                    return "Field Required";
+                    return getLang(context, "FieldRequired");
                   } else if (val.length != 10) {
-                    return "Phone number must be 10 digits";
+                    return getLang(context, "Phonenumbermustbe10digits");
                   }
                   return null;
                 },
@@ -175,7 +177,7 @@ class _ProfileAccountState extends State<ProfileAccount> {
                 controller: usernameCrl,
                 validator: (val) {
                   if (val.isEmpty) {
-                    return "Field Required";
+                    return getLang(context, "FieldRequired");
                   }
                   return null;
                 },
@@ -201,7 +203,7 @@ class _ProfileAccountState extends State<ProfileAccount> {
                 controller: addressCrl,
                 validator: (val) {
                   if (val.isEmpty) {
-                    return "Field Required";
+                    return getLang(context, "FieldRequired");
                   }
                   return null;
                 },
@@ -231,12 +233,12 @@ class _ProfileAccountState extends State<ProfileAccount> {
                       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                   RegExp regex = RegExp(pattern);
                   if (value.isEmpty) {
-                    return "FieldRequired";
+                    return getLang(context, "FieldRequired");
                   }
                   if (value.length > 50) {
-                    return "validateless50";
+                    return getLang(context, "validateless50");
                   } else if (!regex.hasMatch(value)) {
-                    return "Enter valid email";
+                    return getLang(context, "Entervalidemail");
                   } else {
                     emailCrl.text = value;
                   }
@@ -257,8 +259,8 @@ class _ProfileAccountState extends State<ProfileAccount> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32),
             child: TextButton(
-                child: Text("Save".toUpperCase(),
-                    style: const TextStyle(fontSize: 14, color: black)),
+                child: Text(getLang(context, "Save"),
+                    style: const TextStyle(fontSize: 14, color: yellow)),
                 style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
                         const EdgeInsets.all(15)),
@@ -267,7 +269,7 @@ class _ProfileAccountState extends State<ProfileAccount> {
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
-                            side: const BorderSide(color: black)))),
+                            side: const BorderSide(color: yellow)))),
                 onPressed: () async {
                   String phoneText = phoneCrl.text.toString();
                   String nameText = usernameCrl.text;
@@ -323,9 +325,9 @@ class _ProfileAccountState extends State<ProfileAccount> {
       ),
       child: Column(
         children: <Widget>[
-          const Text(
-            "Profile Picture",
-            style: TextStyle(
+          Text(
+            getLang(context, "ProfilePicture"),
+            style: const TextStyle(
               fontSize: 20.0,
               fontFamily: 'Simpletax',
             ),
@@ -339,8 +341,8 @@ class _ProfileAccountState extends State<ProfileAccount> {
               onPressed: () async {
                 getImage(ImageSource.gallery);
               },
-              label: const Text("Gallery",
-                  style: TextStyle(
+              label: Text(getLang(context, "Gallery"),
+                  style: const TextStyle(
                     fontFamily: 'Simpletax',
                   )),
             ),
@@ -349,8 +351,8 @@ class _ProfileAccountState extends State<ProfileAccount> {
               onPressed: () async {
                 getImage(ImageSource.camera);
               },
-              label: const Text("Camera",
-                  style: TextStyle(
+              label: Text(getLang(context, "Camera"),
+                  style: const TextStyle(
                     fontFamily: 'Simpletax',
                   )),
             ),

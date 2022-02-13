@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">476163234982-j62kr7vg0bn3ekoe5r0e0sat0ht8k74t.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">476163234982</string>
+    <string name="google_api_key" translatable="false">AIzaSyD5vhS0vkczlWhJ5Xf6uO5kqS1haLd1S54</string>
+    <string name="google_app_id" translatable="false">1:476163234982:android:9dc04ef042fb2ec6d36867</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD5vhS0vkczlWhJ5Xf6uO5kqS1haLd1S54</string>
+    <string name="google_storage_bucket" translatable="false">education-nearby.appspot.com</string>
+    <string name="project_id" translatable="false">education-nearby</string>
+</resources>

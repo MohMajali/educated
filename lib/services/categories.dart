@@ -22,15 +22,15 @@ class CategoryApi {
       funtions.message("No Internet Connection");
       return Failure(code: 102, errorResponse: "Invalid format");
     } catch (ex) {
-      funtions.message(ex.toString());
-
+      funtions.message("No Internet Connection");
       return Failure(code: 103, errorResponse: "Unkown Error");
     }
   }
 
   static Future<Object> category(var id) async {
     try {
-      String url = 'http://192.248.144.136/api/catlist.php?service_ID=' + id.toString();
+      String url =
+          'http://192.248.144.136/api/catlist.php?service_ID=' + id.toString();
       var response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         return Success(response: categoryFromJson(response.body));
@@ -45,8 +45,7 @@ class CategoryApi {
       funtions.message("No Internet Connection");
       return Failure(code: 102, errorResponse: "Invalid format");
     } catch (ex) {
-      funtions.message(ex.toString());
-
+      funtions.message("No Internet Connection");
       return Failure(code: 103, errorResponse: "Unkown Error");
     }
   }

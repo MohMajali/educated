@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -5,52 +6,52 @@ import 'constant_colors.dart';
 
 const kAnimationDuration = Duration(milliseconds: 200);
 
-Padding cardMainPage(
-    BuildContext context, String str, Widget goto, Image image) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
-    child: Card(
-      color: yellow,
-      shape: rectangleBorder(),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => goto),
-                );
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: boxDecoration(),
-                child: ListTile(
-                  leading: image,
-                  trailing:
-                      const Icon(Icons.arrow_forward_ios, color: Colors.white),
-                  title: Text(
-                    str,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
-}
+// Padding cardMainPage(
+//     BuildContext context, String str, Widget goto, Image image) {
+//   return Padding(
+//     padding: const EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
+//     child: Card(
+//       color: yellow,
+//       shape: rectangleBorder(),
+//       child: Padding(
+//         padding: const EdgeInsets.all(8.0),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.stretch,
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             InkWell(
+//               onTap: () {
+//                 Navigator.of(context).pop();
+//                 Navigator.push(
+//                   context,
+//                   MaterialPageRoute(builder: (context) => goto),
+//                 );
+//               },
+//               child: Container(
+//                 width: MediaQuery.of(context).size.width,
+//                 decoration: boxDecoration(),
+//                 child: ListTile(
+//                   leading: image,
+//                   trailing:
+//                       const Icon(Icons.arrow_forward_ios, color: Colors.white),
+//                   title: Text(
+//                     str,
+//                     style: const TextStyle(
+//                         color: Colors.white,
+//                         fontSize: 25,
+//                         fontWeight: FontWeight.bold,
+//                         letterSpacing: 1),
+//                     textAlign: TextAlign.center,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     ),
+//   );
+// }
 
 Widget getBottomSheet(
     String name, String mail, String description, double lat, double long) {
@@ -223,7 +224,7 @@ InputDecoration secoundaryInputDecoration(
     ),
     filled: true,
     fillColor: Colors.white,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
   );
 }
 
@@ -272,10 +273,10 @@ InputDecoration secoundaryInputDecoration2(
   );
 }
 
-Container submit(BuildContext context, String str) {
+Container submit(BuildContext context, String str, Color color) {
   return Container(
     width: MediaQuery.of(context).size.width,
-    decoration: boxDecoration(),
+    decoration: boxDecoration(color),
     child: Padding(
       padding: const EdgeInsets.only(top: 13.0, bottom: 8.0),
       child: Text(
@@ -382,13 +383,27 @@ RoundedRectangleBorder rectangleBorder() {
   );
 }
 
-BoxDecoration boxDecoration() {
-  return BoxDecoration(
-      color: yellow, borderRadius: BorderRadius.circular(10.0));
+BoxDecoration boxDecoration(Color color) {
+  return BoxDecoration(color: color, borderRadius: BorderRadius.circular(10.0));
 }
 
 SizedBox sizedBoxHomePage(double height) {
   return SizedBox(
     height: height,
   );
+}
+
+AwesomeDialog awesome(String title, BuildContext context) {
+  return AwesomeDialog(
+    dialogBackgroundColor: yellow,
+    context: context,
+    headerAnimationLoop: true,
+    dialogType: DialogType.ERROR,
+    body: Text(
+      title,
+      style: const TextStyle(
+          color: yellow, fontWeight: FontWeight.bold, fontSize: 30),
+    ),
+    autoHide: const Duration(seconds: 7),
+  )..show();
 }

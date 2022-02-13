@@ -1,5 +1,6 @@
 import 'package:educatednearby/constant/components.dart';
 import 'package:educatednearby/constant/constant_colors.dart';
+import 'package:educatednearby/package/applocal.dart';
 import 'package:educatednearby/services/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,12 +11,12 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  var _keyUserName = GlobalKey<FormState>();
-  var _keyEmail = GlobalKey<FormState>();
-  var _keyPassword = GlobalKey<FormState>();
-  var _keyConfirmPassword = GlobalKey<FormState>();
-  var _keyPhone = GlobalKey<FormState>();
-  var _keyAddress = GlobalKey<FormState>();
+  final _keyUserName = GlobalKey<FormState>();
+  final _keyEmail = GlobalKey<FormState>();
+  final _keyPassword = GlobalKey<FormState>();
+  final _keyConfirmPassword = GlobalKey<FormState>();
+  final _keyPhone = GlobalKey<FormState>();
+  final _keyAddress = GlobalKey<FormState>();
 
   TextEditingController usernameCrl = TextEditingController();
   TextEditingController passwordCrl = TextEditingController();
@@ -29,14 +30,14 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[500],
+        backgroundColor: yellow,
         body: ListView(
           children: [
             const SizedBox(
               height: 25,
             ),
-            textHomePage(
-                context, "Signup with", 20, FontWeight.bold, 2, null, yellow),
+            // textHomePage(
+            //     context, "Signup with", 20, FontWeight.bold, 2, null, yellow),
             sizedBoxHomePage(10),
             Padding(
               padding: const EdgeInsets.only(left: 32, right: 32),
@@ -55,15 +56,15 @@ class _SignupScreenState extends State<SignupScreen> {
                   ],
                   validator: (val) {
                     if (val.isEmpty) {
-                      return "Field Required";
+                      return getLang(context, "FieldRequired");
                     } else if (val.length != 10) {
-                      return "Phone number must be 10 digits";
+                      return getLang(context, "Phonenumbermustbe10digits");
                     }
                     return null;
                   },
                   decoration: secoundaryInputDecoration(
                       context,
-                      "Phone Number",
+                      getLang(context, "PhoneNumber"),
                       null,
                       const Icon(
                         Icons.phone_android,
@@ -83,13 +84,13 @@ class _SignupScreenState extends State<SignupScreen> {
                   controller: usernameCrl,
                   validator: (val) {
                     if (val.isEmpty) {
-                      return "Field Required";
+                      return getLang(context, "FieldRequired");
                     }
                     return null;
                   },
                   decoration: secoundaryInputDecoration(
                       context,
-                      "UserName",
+                      getLang(context, "UserName"),
                       null,
                       const Icon(
                         Icons.person,
@@ -109,13 +110,13 @@ class _SignupScreenState extends State<SignupScreen> {
                   controller: addressCrl,
                   validator: (val) {
                     if (val.isEmpty) {
-                      return "Field Required";
+                      return getLang(context, "FieldRequired");
                     }
                     return null;
                   },
                   decoration: secoundaryInputDecoration(
                       context,
-                      "Address",
+                      getLang(context, "Address"),
                       null,
                       const Icon(
                         Icons.home,
@@ -139,12 +140,12 @@ class _SignupScreenState extends State<SignupScreen> {
                         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
                     RegExp regex = new RegExp(pattern);
                     if (value.isEmpty) {
-                      return "FieldRequired";
+                      return getLang(context, "FieldRequired");
                     }
                     if (value.length > 50) {
-                      return "validate less 50";
+                      return getLang(context, "validateless50");
                     } else if (!regex.hasMatch(value)) {
-                      return "Enter valid email";
+                      return getLang(context, "Entervalidemail");
                     } else {
                       emailCrl.text = value;
                     }
@@ -152,7 +153,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   },
                   decoration: secoundaryInputDecoration(
                       context,
-                      "Email",
+                      getLang(context, "Email"),
                       null,
                       const Icon(
                         Icons.email,
@@ -173,17 +174,17 @@ class _SignupScreenState extends State<SignupScreen> {
                   obscureText: !_passwordVisibleSignUp1,
                   validator: (val) {
                     if (val.isEmpty) {
-                      return "Field Required";
+                      return getLang(context, "FieldRequired");
                     } else if (val.length < 6) {
-                      return "pass eq 0 or more";
+                      return getLang(context, "passeq0ormore");
                     } else if (val.length > 30) {
-                      return "validate less 30";
+                      return getLang(context, "validateless30");
                     }
                     return null;
                   },
                   decoration: secoundaryInputDecoration(
                       context,
-                      "Password",
+                      getLang(context, "Password"),
                       IconButton(
                           icon: Icon(
                             // Based on passwordVisible state choose the icon
@@ -216,20 +217,20 @@ class _SignupScreenState extends State<SignupScreen> {
                   controller: confirmPasswordCrl,
                   validator: (val) {
                     if (val.isEmpty) {
-                      return "Field Required";
+                      return getLang(context, "FieldRequired");
                     } else if (val.length < 6) {
-                      return "pass eq 0 or more";
+                      return getLang(context, "passeq0ormore");
                     } else if (val.length > 30) {
-                      return "validate less 30";
+                      return getLang(context, "validateless30");
                     } else if (passwordCrl.text != confirmPasswordCrl.text) {
-                      return "Password Not Match";
+                      return getLang(context, "PasswordNotMatch");
                     }
                     return null;
                   },
                   obscureText: !_passwordVisibleSignUp2,
                   decoration: secoundaryInputDecoration(
                       context,
-                      "ConfirmPassword",
+                      getLang(context, "ConfirmPassword"),
                       IconButton(
                           icon: Icon(
                             // Based on passwordVisible state choose the icon
@@ -266,15 +267,15 @@ class _SignupScreenState extends State<SignupScreen> {
                       _keyEmail.currentState.validate() &&
                       _keyPassword.currentState.validate() &&
                       _keyConfirmPassword.currentState.validate() &&
-                      _keyAddress.currentState.validate()) {
+                      _keyAddress.currentState.validate() &&
+                      _keyConfirmPassword.currentState.validate()) {
                     await SignupAPI.signup(
                         phone, mail, password, address, name, context);
-                    // print(phone+ ' ' +mail+ ' ' +password+ ' ' +address);
                   } else {
                     // return print('object');
                   }
                 },
-                child: submit(context, "SIGNUP"),
+                child: submit(context, getLang(context, "SIGNUP"), black),
               ),
             )
           ],

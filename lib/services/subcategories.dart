@@ -1,7 +1,10 @@
 import 'dart:io';
+import 'package:educatednearby/constant/components.dart';
 import 'package:educatednearby/models/subcat.dart';
 import 'package:educatednearby/repo.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:educatednearby/fun/goto.dart';
 
 class SubCategoryApi {
   static Future<Object> getSubCats(var catID) async {
@@ -13,12 +16,16 @@ class SubCategoryApi {
       if (response.statusCode == 200) {
         return Success(response: subcategoryFromJson(response.body));
       }
+      funtions.message("No Internet Connection");
       return Failure(code: 100, errorResponse: "Invalid response");
     } on HttpException {
+      funtions.message("No Internet Connection");
       return Failure(code: 101, errorResponse: "No Internet");
     } on FormatException {
+      funtions.message("No Internet Connection");
       return Failure(code: 102, errorResponse: "Invalid format");
     } catch (ex) {
+      funtions.message("No Internet Connection");
       return Failure(code: 103, errorResponse: "Unkown Error");
     }
   }

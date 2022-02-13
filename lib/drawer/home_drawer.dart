@@ -2,6 +2,7 @@ import 'package:educatednearby/constant/constant_colors.dart';
 import 'package:educatednearby/main.dart';
 import 'package:educatednearby/package/applocal.dart';
 import 'package:educatednearby/screens/login.dart';
+import 'package:educatednearby/screens/navbar.dart';
 import 'package:educatednearby/screens/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -181,13 +182,18 @@ class _HomeDrawerState extends State<HomeDrawer> {
               ),
               leading: const Icon(Icons.shop, color: Colors.white, size: 25),
               onTap: () {
-                print(lang);
                 lang == "en"
                     ? MyApp.setLocale(context, Locale("ar", ""))
                     : MyApp.setLocale(context, Locale("en", ""));
                 setState(() {
                   lang == "en" ? lang = "ar" : lang = "en";
                 });
+                Navigator.pushReplacement<void, void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => NavBar(),
+                  ),
+                );
               },
             ),
             const Divider(

@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:educatednearby/constant/components.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import '../repo.dart';
+import 'package:educatednearby/fun/goto.dart';
 
 Future updates(int id, String mail, String name, String phone, String address,
     BuildContext context) async {
@@ -28,12 +30,16 @@ Future updates(int id, String mail, String name, String phone, String address,
           textColor: Colors.white,
           fontSize: 16.0);
     }
+    funtions.message("No Internet Connection");
     return Failure(code: 100, errorResponse: "Invalid response");
   } on HttpException {
+    funtions.message("No Internet Connection");
     return Failure(code: 101, errorResponse: "No Internet");
   } on FormatException {
+    funtions.message("No Internet Connection");
     return Failure(code: 102, errorResponse: "Invalid format");
   } catch (ex) {
+    funtions.message("No Internet Connection");
     return Failure(code: 103, errorResponse: "Unkown Error");
   }
 }
@@ -60,12 +66,16 @@ Future CV(int id, String cv, String cvDecode, String natID, String natDecode,
           textColor: Colors.white,
           fontSize: 16.0);
     }
+    funtions.message("No Internet Connection");
     return Failure(code: 100, errorResponse: "Invalid response");
   } on HttpException {
+    funtions.message("No Internet Connection");
     return Failure(code: 101, errorResponse: "No Internet");
   } on FormatException {
+    funtions.message("No Internet Connection");
     return Failure(code: 102, errorResponse: "Invalid format");
   } catch (ex) {
+    funtions.message("No Internet Connection");
     return Failure(code: 103, errorResponse: "Unkown Error");
   }
 }
@@ -90,12 +100,16 @@ Future profile(
           textColor: Colors.white,
           fontSize: 16.0);
     }
+    funtions.message("No Internet Connection");
     return Failure(code: 100, errorResponse: "Invalid response");
   } on HttpException {
+    funtions.message("No Internet Connection");
     return Failure(code: 101, errorResponse: "No Internet");
   } on FormatException {
+    funtions.message("No Internet Connection");
     return Failure(code: 102, errorResponse: "Invalid format");
   } catch (ex) {
+    funtions.message("No Internet Connection");
     return Failure(code: 103, errorResponse: "Unkown Error");
   }
 }
@@ -120,12 +134,16 @@ Future national(
           textColor: Colors.white,
           fontSize: 16.0);
     }
+    funtions.message("No Internet Connection");
     return Failure(code: 100, errorResponse: "Invalid response");
   } on HttpException {
+    funtions.message("No Internet Connection");
     return Failure(code: 101, errorResponse: "No Internet");
   } on FormatException {
+    funtions.message("No Internet Connection");
     return Failure(code: 102, errorResponse: "Invalid format");
   } catch (ex) {
+    funtions.message("No Internet Connection");
     return Failure(code: 103, errorResponse: "Unkown Error");
   }
 }
@@ -149,12 +167,16 @@ Future cvOnly(int id, String cv, String cvDecode, BuildContext context) async {
           textColor: Colors.white,
           fontSize: 16.0);
     }
+    funtions.message("No Internet Connection");
     return Failure(code: 100, errorResponse: "Invalid response");
   } on HttpException {
+    funtions.message("No Internet Connection");
     return Failure(code: 101, errorResponse: "No Internet");
   } on FormatException {
+    funtions.message("No Internet Connection");
     return Failure(code: 102, errorResponse: "Invalid format");
   } catch (ex) {
+    funtions.message("No Internet Connection");
     return Failure(code: 103, errorResponse: "Unkown Error");
   }
 }

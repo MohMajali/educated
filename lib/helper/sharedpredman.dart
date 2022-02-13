@@ -3,15 +3,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPref {
   static void storeUserData(String email, String name, String phone,
       String address, int id, String image) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setInt("userID", id);
-    sharedPreferences.setString("mail", email);
-    sharedPreferences.setString("name", name);
-    sharedPreferences.setString("address", address);
-    sharedPreferences.setString("phone", phone);
-    sharedPreferences.setString("image", image);
-    sharedPreferences.setBool("loggedin", true);
-    sharedPreferences.commit();
+    SharedPreferences sharedUser = await SharedPreferences.getInstance();
+    sharedUser.setInt("userID", id);
+    sharedUser.setString("mail", email);
+    sharedUser.setString("name", name);
+    sharedUser.setString("address", address);
+    sharedUser.setString("phone", phone);
+    sharedUser.setString("image", image);
+    sharedUser.setBool("loggedin", true);
+    sharedUser.commit();
   }
 
 // static Future<bool> isUserLoggedIn() async{
@@ -23,8 +23,13 @@ class SharedPref {
 // }
 
   static void userLogOut() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.setBool("loggedin", false);
-    sharedPreferences.clear();
+    SharedPreferences sharedClear = await SharedPreferences.getInstance();
+    sharedClear.setBool("loggedin", false);
+    sharedClear.remove("userID");
+    sharedClear.remove("mail");
+    sharedClear.remove("name");
+    sharedClear.remove("address");
+    sharedClear.remove("phone");
+    sharedClear.remove("image");
   }
 }

@@ -1,12 +1,15 @@
 import 'package:educatednearby/constant/constant_colors.dart';
 import 'package:educatednearby/constant/urls.dart';
 import 'package:educatednearby/helper/sharedpredman.dart';
+import 'package:educatednearby/package/applocal.dart';
 import 'package:educatednearby/screens/certification.dart';
-import 'package:educatednearby/screens/home_page.dart';
+import 'package:educatednearby/screens/navbar.dart';
 import 'package:educatednearby/screens/profile_account.dart';
 import 'package:educatednearby/screens/service.dart';
+import 'package:educatednearby/view_model/cv_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
 
 import '../main.dart';
 
@@ -18,7 +21,7 @@ class HomeDrawerLogin extends StatefulWidget {
 }
 
 class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
-  String lang;
+  String lang = sharedPreferences.getString("lang");
   String mail = sharedPreferences.getString("mail");
   String name = sharedPreferences.getString("name");
   String image = sharedPreferences.getString("image");
@@ -30,7 +33,9 @@ class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
     // getPref();
   }
 
+  @override
   Widget build(BuildContext context) {
+    CvViewModel cvViewModel = context.watch<CvViewModel>();
     return Drawer(
       child: Container(
         color: yellow,
@@ -77,9 +82,9 @@ class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
               ),
             ),
             ListTile(
-              title: const Text(
-                "PrivacyPolicy",
-                style: TextStyle(
+              title: Text(
+                getLang(context, "Privacy"),
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -94,9 +99,9 @@ class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
               thickness: 0.75,
             ),
             ListTile(
-              title: const Text(
-                "TermsAndConditions",
-                style: TextStyle(
+              title: Text(
+                getLang(context, "TermsAndConditions"),
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -111,9 +116,9 @@ class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
               thickness: 0.75,
             ),
             ListTile(
-              title: const Text(
-                "AboutUs",
-                style: TextStyle(
+              title: Text(
+                getLang(context, "AboutUs"),
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -128,9 +133,9 @@ class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
               thickness: 0.75,
             ),
             ListTile(
-              title: const Text(
-                "ContactUs",
-                style: TextStyle(
+              title: Text(
+                getLang(context, "ContactUs"),
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -149,9 +154,9 @@ class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
               thickness: 0.75,
             ),
             ListTile(
-              title: const Text(
-                "Profile",
-                style: TextStyle(
+              title: Text(
+                getLang(context, "profile"),
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -175,9 +180,9 @@ class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
               thickness: 0.75,
             ),
             ListTile(
-              title: const Text(
-                "Cirtifications",
-                style: TextStyle(
+              title: Text(
+                getLang(context, "Cirtifications"),
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -185,7 +190,8 @@ class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
               ),
               leading: const Icon(Icons.wb_incandescent,
                   color: Colors.white, size: 25),
-              onTap: () {
+              onTap: () async {
+                await cvViewModel.getCVs(widget.id);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -200,9 +206,9 @@ class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
               thickness: 0.75,
             ),
             ListTile(
-              title: const Text(
-                "Language",
-                style: TextStyle(
+              title: Text(
+                getLang(context, "Language"),
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -210,12 +216,18 @@ class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
               ),
               leading: const Icon(Icons.shop, color: Colors.white, size: 25),
               onTap: () {
-                // if (lang.toString() == "en") {
-                //   AjwaaDriverApp.setLocale(context, Locale("ar", ""));
-                // } else {
-                //   AjwaaDriverApp.setLocale(context, Locale("en", ""));
-                // }
-                // Navigator.pop(context);
+                lang == "en"
+                    ? MyApp.setLocale(context, Locale("ar", ""))
+                    : MyApp.setLocale(context, Locale("en", ""));
+                setState(() {
+                  lang == "en" ? lang = "ar" : lang = "en";
+                });
+                Navigator.pushReplacement<void, void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => NavBar(),
+                  ),
+                );
               },
             ),
             const Divider(
@@ -223,9 +235,9 @@ class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
               thickness: 0.75,
             ),
             ListTile(
-              title: const Text(
-                "Log Out",
-                style: TextStyle(
+              title: Text(
+                getLang(context, "LogOut"),
+                style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -233,20 +245,14 @@ class _HomeDrawerLoginState extends State<HomeDrawerLogin> {
               ),
               leading: const Icon(Icons.logout, color: Colors.white, size: 25),
               onTap: () async {
-                // SharedPreferences sharedPreferences =
-                //     await SharedPreferences.getInstance();
-                // sharedPreferences.setBool("isLogged", false);
-                // sharedPreferences.clear();
-                // Navigator.of(context).pushAndRemoveUntil(
-                //   CupertinoPageRoute(builder: (context) => HomePage()),
-                //   (_) => false,
-                // );
                 SharedPref.userLogOut();
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const ServiceScreen()),
-                    (Route<dynamic> route) => false);
+                // Navigator.of(context).pop();
+                Navigator.pushReplacement<void, void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => NavBar(),
+                  ),
+                );
               },
             ),
           ],

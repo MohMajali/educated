@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "476163234982",
+    "project_id": "education-nearby",
+    "storage_bucket": "education-nearby.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476163234982:android:9dc04ef042fb2ec6d36867",
+        "android_client_info": {
+          "package_name": "education.com.nearby"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476163234982-qmfnhqsb4ml0a38llfkjpmveap249v2k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "education.com.nearby",
+            "certificate_hash": "bb180454aba79308c50440675174dc502551482d"
+          }
+        },
+        {
+          "client_id": "476163234982-j62kr7vg0bn3ekoe5r0e0sat0ht8k74t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5vhS0vkczlWhJ5Xf6uO5kqS1haLd1S54"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476163234982-j62kr7vg0bn3ekoe5r0e0sat0ht8k74t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,6 +2,7 @@
 //
 //     final subcategory = subcategoryFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 List<Subcategory> subcategoryFromJson(String str) => List<Subcategory>.from(
@@ -12,32 +13,28 @@ String subcategoryToJson(List<Subcategory> data) =>
 
 class Subcategory {
   Subcategory({
-    this.id,
-    this.nameEn,
-    this.nameAr,
-    this.image,
-    this.storeId,
+    @required this.id,
+    @required this.nameEn,
+    @required this.nameAr,
+    @required this.imagePath,
   });
 
   final int id;
   final String nameEn;
   final String nameAr;
-  final String image;
-  final int storeId;
+  final String imagePath;
 
   factory Subcategory.fromJson(Map<String, dynamic> json) => Subcategory(
         id: json["id"],
         nameEn: json["name_en"],
         nameAr: json["name_ar"],
-        image: json["image"],
-        storeId: json["store_id"],
+        imagePath: json["image_path"] == null ? null : json["image_path"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name_en": nameEn,
         "name_ar": nameAr,
-        "image": image,
-        "store_id": storeId,
+        "image_path": imagePath == null ? null : imagePath,
       };
 }

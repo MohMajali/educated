@@ -11,10 +11,6 @@ class ServiceViewModel extends ChangeNotifier {
   bool get loading => _loading;
   List<Services> get services => _services;
 
-  ServiceViewModel() {
-    getService();
-  }
-
   setLoading(bool loading) async {
     _loading = loading;
     notifyListeners();

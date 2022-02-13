@@ -2,6 +2,7 @@
 //
 //     final category = categoryFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 List<Category> categoryFromJson(String str) =>
@@ -12,28 +13,28 @@ String categoryToJson(List<Category> data) =>
 
 class Category {
   Category({
-    this.id,
-    this.nameEn,
-    this.nameAr,
-    this.image,
+    @required this.id,
+    @required this.nameEn,
+    @required this.nameAr,
+    @required this.imagePath,
   });
 
   final int id;
   final String nameEn;
   final String nameAr;
-  final String image;
+  final dynamic imagePath;
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
         nameEn: json["name_en"],
         nameAr: json["name_ar"],
-        image: json["image"],
+        imagePath: json["image_path"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name_en": nameEn,
         "name_ar": nameAr,
-        "image": image,
+        "image_path": imagePath,
       };
 }

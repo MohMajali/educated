@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:educatednearby/constant/constant_colors.dart';
 import 'package:educatednearby/constant/urls.dart';
-import 'package:educatednearby/models/cvs.dart';
+import 'package:educatednearby/package/applocal.dart';
 import 'package:educatednearby/services/updates.dart';
+import 'package:educatednearby/view_model/cv_view.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/src/provider.dart';
+
+import '../main.dart';
 
 class Certifications extends StatefulWidget {
   final int id;
@@ -26,8 +29,8 @@ class _CertificationsState extends State<Certifications> {
   String natApi;
   String cvApi;
   String descApi;
-  List<Cvs> cvs = [];
   final imagePicker = ImagePicker();
+  var lang = sharedPreferences.getString("lang");
   // int id = sharedPreferences.getInt("userID");
 
   Future getImage(ImageSource src) async {
@@ -40,34 +43,9 @@ class _CertificationsState extends State<Certifications> {
     });
   }
 
-  Future<List<Cvs>> getCV() async {
-    String url =
-        'http://192.248.144.136/api/getCv.php?id=' + widget.id.toString();
-
-    try {
-      var response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        final List<Cvs> cvList = cvsFromJson(response.body);
-        return cvList;
-      } else {
-        // ignore: deprecated_member_use
-        return List<Cvs>();
-      }
-    } catch (x) {
-      print(x);
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    getCV().then((cvList) {
-      setState(() {
-        cvs = cvList;
-        print(cvs);
-      });
-    });
-    // print(natApi);
   }
 
   @override
@@ -78,11 +56,12 @@ class _CertificationsState extends State<Certifications> {
 
   @override
   Widget build(BuildContext context) {
+    CvViewModel cvViewModel = context.watch<CvViewModel>();
     return Scaffold(
-      backgroundColor: Colors.grey[500],
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         backgroundColor: yellow,
-        title: const Text("Cirtifications"),
+        title: Text(getLang(context, "Cirtifications")),
       ),
       body: Center(
         child: Column(
@@ -96,7 +75,7 @@ class _CertificationsState extends State<Certifications> {
               height: MediaQuery.of(context).size.height * 0.20,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: pic(),
+                      image: pic(cvViewModel),
                       fit: BoxFit.cover,
                       alignment: Alignment.center)),
             ),
@@ -110,12 +89,12 @@ class _CertificationsState extends State<Certifications> {
                         showModalBottomSheet(
                           context: context,
                           builder: ((builder) =>
-                              bottomSheetNatID("National ID")),
+                              bottomSheetNatID(getLang(context, "NationalID"))),
                         );
                       },
-                      child: const Text(
-                        "Attach National ID",
-                        style: TextStyle(color: yellow),
+                      child: Text(
+                        getLang(context, "AttachNationalID"),
+                        style: const TextStyle(color: yellow),
                       ))),
             ),
             const SizedBox(
@@ -125,7 +104,7 @@ class _CertificationsState extends State<Certifications> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 150,
+                  width: lang == 'ar' ? 180 : 130,
                   child: RaisedButton(
                     onPressed: () {
                       setState(() {
@@ -137,18 +116,18 @@ class _CertificationsState extends State<Certifications> {
                     },
                     color: yellow,
                     child: Row(
-                      children: const [
-                        Icon(
+                      children: [
+                        const Icon(
                           Icons.description,
                           color: Colors.white,
                           size: 20,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Text(
-                          "Upload CV",
-                          style: TextStyle(
+                          getLang(context, "UploadCV"),
+                          style: const TextStyle(
                               color: Colors.white, fontFamily: 'Simpletax'),
                         ),
                       ],
@@ -164,14 +143,17 @@ class _CertificationsState extends State<Certifications> {
               ],
             ),
             cvpath == null
-                ? cvs.length == 0
-                    ? const Text(
-                        "Please Add Put file",
+                ? cvViewModel.cv.length == 0
+                    ? Text(
+                        getLang(context, "PleaseAddPutfile"),
                         style: TextStyle(color: yellow),
                       )
-                    : cvs[0].resume != null
-                        ? Text(cvs[0].resume)
-                        : const Text("Please Add Put file")
+                    : cvViewModel.cv[0].resume != null
+                        ? Text(
+                            cvViewModel.cv[0].resume,
+                            style: const TextStyle(color: yellow),
+                          )
+                        : Text(getLang(context, "PleaseAddPutfile"))
                 : Text(cvpath),
             const SizedBox(
               height: 20,
@@ -184,7 +166,7 @@ class _CertificationsState extends State<Certifications> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: TextButton(
-                          child: Text("Save".toUpperCase(),
+                          child: Text(getLang(context, "Save"),
                               style: const TextStyle(fontSize: 14)),
                           style: ButtonStyle(
                               padding: MaterialStateProperty.all<EdgeInsets>(
@@ -257,8 +239,8 @@ class _CertificationsState extends State<Certifications> {
               onPressed: () async {
                 getImage(ImageSource.gallery);
               },
-              label: const Text("Gallery",
-                  style: TextStyle(
+              label: Text(getLang(context, "Gallery"),
+                  style: const TextStyle(
                     fontFamily: 'Simpletax',
                   )),
             ),
@@ -267,8 +249,8 @@ class _CertificationsState extends State<Certifications> {
               onPressed: () async {
                 getImage(ImageSource.camera);
               },
-              label: const Text("Camera",
-                  style: TextStyle(
+              label: Text(getLang(context, "Camera"),
+                  style: const TextStyle(
                     fontFamily: 'Simpletax',
                   )),
             ),
@@ -278,14 +260,15 @@ class _CertificationsState extends State<Certifications> {
     );
   }
 
-  ImageProvider pic() {
-    if (images == null && cvs.isEmpty) {
+  ImageProvider pic(CvViewModel cvViewModel) {
+    if (images == null && cvViewModel.cv.isEmpty) {
       return const AssetImage("assets/images/userdefault.jpg");
     } else if (images != null) {
       return FileImage(File(images.path));
-    } else if (cvs.isNotEmpty && cvs[0].identityPic != null) {
-      return NetworkImage(Api.imagurl + cvs[0].identityPic);
-    } else if (cvs[0].identityPic == null) {
+    } else if (cvViewModel.cv.isNotEmpty &&
+        cvViewModel.cv[0].identityPic != null) {
+      return NetworkImage(Api.imagurl + cvViewModel.cv[0].identityPic);
+    } else if (cvViewModel.cv[0].identityPic == null) {
       return const AssetImage("assets/images/userdefault.jpg");
     } else {
       return const AssetImage("assets/images/userdefault.jpg");
@@ -302,9 +285,9 @@ class _CertificationsState extends State<Certifications> {
       ),
       child: Column(
         children: <Widget>[
-          const Text(
-            "Choose your CV",
-            style: TextStyle(
+          Text(
+            getLang(context, "ChooseyourCV"),
+            style: const TextStyle(
               fontSize: 20.0,
               fontFamily: 'Simpletax',
             ),
@@ -331,8 +314,8 @@ class _CertificationsState extends State<Certifications> {
                 cvpath = file.path.split("/").last;
                 Navigator.pop(context);
               },
-              label: const Text("Files",
-                  style: TextStyle(
+              label: Text(getLang(context, "Files"),
+                  style: const TextStyle(
                     fontFamily: 'Simpletax',
                   )),
             ),
