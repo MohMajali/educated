@@ -16,6 +16,7 @@ class funtions {
     LocationPermission per;
     services = await Geolocator.isLocationServiceEnabled();
     if (services == false) {
+      print("HO");
       showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
