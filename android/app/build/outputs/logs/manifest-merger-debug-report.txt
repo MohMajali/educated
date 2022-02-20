@@ -29,6 +29,7 @@ MERGED from [:sqflite] D:\digiFrameflutter\educatednearby\build\sqflite\intermed
 MERGED from [:url_launcher_android] D:\digiFrameflutter\educatednearby\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-14:12
 MERGED from [:app_links] D:\digiFrameflutter\educatednearby\build\app_links\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:location] D:\digiFrameflutter\educatednearby\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-18:12
+MERGED from [:launch_review] D:\digiFrameflutter\educatednearby\build\launch_review\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\4ad32c1fb428fa69d85d360ac07bdb32\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-analytics:20.0.2] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\d4e3f7ea222d12918d87bd0b818b40d5\jetified-firebase-analytics-20.0.2\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:firebase-messaging:23.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\a56e3d53fd5d36e5f52666c5a0543711\jetified-firebase-messaging-23.0.0\AndroidManifest.xml:17:1-58:12
@@ -376,6 +377,8 @@ MERGED from [:app_links] D:\digiFrameflutter\educatednearby\build\app_links\inte
 MERGED from [:app_links] D:\digiFrameflutter\educatednearby\build\app_links\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:location] D:\digiFrameflutter\educatednearby\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:location] D:\digiFrameflutter\educatednearby\build\location\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:launch_review] D:\digiFrameflutter\educatednearby\build\launch_review\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:launch_review] D:\digiFrameflutter\educatednearby\build\launch_review\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\4ad32c1fb428fa69d85d360ac07bdb32\multidex-2.0.0\AndroidManifest.xml:20:5-43
 MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\4ad32c1fb428fa69d85d360ac07bdb32\multidex-2.0.0\AndroidManifest.xml:20:5-43
 MERGED from [com.google.firebase:firebase-analytics:20.0.2] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\d4e3f7ea222d12918d87bd0b818b40d5\jetified-firebase-analytics-20.0.2\AndroidManifest.xml:5:5-44

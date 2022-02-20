@@ -61,6 +61,7 @@ dependencies:
   firebase_dynamic_links: ^4.0.5
   share_plus: ^3.0.4
   cached_network_image: ^3.2.0
+  launch_review: ^3.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
