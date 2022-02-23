@@ -16,8 +16,8 @@
   "Kilos" : "Kilos",
   "option" : "Choose option",
   "Maps" : "Maps",
-  "ListView" : "ListView",
-  "Stores" : "Stores",
+  "ListView" : "Vendors",
+  "Stores" : "Vendors",
   "StoreName" : "Store Name",
   "Email" : "Email",
   "phone" : "Phone",
@@ -70,5 +70,7 @@
 "title" : "Title",
 "body" : "Subject",
 "SEND" : "SEND",
-"Continue" : "Continue"
+"Continue" : "Continue",
+"Share" : "Share App",
+"Rate" : "Rate Us"
  }

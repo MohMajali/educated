@@ -3,7 +3,7 @@
   "SignUp" : "إنشاء حساب",
   "Privacy" : "سياسة الخصوصية",
   "TermsAndConditions" : "الشروط و الأحكام",
-  "AboutUs" : "عنا",
+  "AboutUs" : "من نحن",
   "ContactUs" : "تواصل معنا",
   "Language" : "English",
   "Ads" : "دعايات",
@@ -16,8 +16,8 @@
   "Kilos" : "كيلومتر",
   "option" : "اختر",
   "Maps" : "خرائط",
-  "ListView" : "قائمة",
-  "Stores" : "متاجر",
+  "ListView" : "مزود خدمات",
+  "Stores" : "مزود خدمات",
   "StoreName" : "اسم المتجر",
   "Email" : "البريد الإلكتروني",
   "phone" : "رقم الهاتف",
@@ -70,5 +70,7 @@
 "title" : "عنوان",
 "body" : "الموضوع",
 "SEND" : "ارسل",
-"Continue" : "متابعة"
-}
+"Continue" : "متابعة",
+"Share" : "انشر التطبيق",
+"Rate" : "قيمنا"
+ }
