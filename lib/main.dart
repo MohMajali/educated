@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:app_links/app_links.dart';
 import 'package:educatednearby/screens/login.dart';
 import 'package:educatednearby/screens/map_screen.dart';
 import 'package:educatednearby/screens/navbar.dart';
@@ -16,14 +14,12 @@ import 'package:educatednearby/view_model/service_view.dart';
 import 'package:educatednearby/view_model/store_view.dart';
 import 'package:educatednearby/view_model/subcat_view.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uni_links/uni_links.dart';
 import 'package/applocal.dart';
 import 'screens/service.dart';
 

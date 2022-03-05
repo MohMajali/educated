@@ -27,10 +27,12 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   int id;
+
   _MapScreenState(this.id);
 
   CameraPosition _initialCamera;
   GoogleMapController _googleMapController;
+
   // Marker marker;
   Circle circle;
   double lat, long;
@@ -90,21 +92,18 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: yellow,
-        centerTitle: true,
-        title: Text(getLang(context, "Maps")),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context, true);
-          },
-          icon: const Icon(Icons.arrow_back),
-        ),
-      ),
+          backgroundColor: yellow,
+          centerTitle: true,
+          title: Text(getLang(context, "Maps")),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context, true);
+              },
+              icon: const Icon(Icons.arrow_back))),
       body: _initialCamera == null
           ? SizedBox(
               height: MediaQuery.of(context).size.height,
-              child: const Center(child: CircularProgressIndicator()),
-            )
+              child: const Center(child: CircularProgressIndicator()))
           : GoogleMap(
               initialCameraPosition: _initialCamera,
               onMapCreated: (GoogleMapController googleMap) {
@@ -114,8 +113,7 @@ class _MapScreenState extends State<MapScreen> {
                 });
               },
               markers: myMarkers,
-              circles: Set.of((circle != null) ? [circle] : []),
-            ),
+              circles: Set.of((circle != null) ? [circle] : [])),
     );
   }
 
@@ -123,9 +121,8 @@ class _MapScreenState extends State<MapScreen> {
     // await storeViewModel.getStore(id);
     if (storeViewModel.loading) {
       return SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: const Center(child: CircularProgressIndicator()),
-      );
+          height: MediaQuery.of(context).size.height,
+          child: const Center(child: CircularProgressIndicator()));
     }
 
     if (storeViewModel.store.isEmpty) {
