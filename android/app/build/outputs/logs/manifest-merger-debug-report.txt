@@ -17,8 +17,9 @@ MERGED from [:flutter_local_notifications] D:\digiFrameflutter\educatednearby\bu
 MERGED from [:file_picker] D:\digiFrameflutter\educatednearby\build\file_picker\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-17:12
 MERGED from [:path_provider_android] D:\digiFrameflutter\educatednearby\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:shared_preferences_android] D:\digiFrameflutter\educatednearby\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:flutter_notification_channel] D:\digiFrameflutter\educatednearby\build\flutter_notification_channel\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:geocoding] D:\digiFrameflutter\educatednearby\build\geocoding\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:video_player] D:\digiFrameflutter\educatednearby\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_notification_channel] D:\digiFrameflutter\educatednearby\build\flutter_notification_channel\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:agora_rtc_engine] D:\digiFrameflutter\educatednearby\build\agora_rtc_engine\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-23:12
 MERGED from [:share_plus] D:\digiFrameflutter\educatednearby\build\share_plus\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-19:12
 MERGED from [:fluttertoast] D:\digiFrameflutter\educatednearby\build\fluttertoast\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
@@ -45,6 +46,10 @@ MERGED from [com.google.firebase:firebase-auth-interop:20.0.0] C:\Users\Samrie\.
 MERGED from [com.google.firebase:firebase-appcheck-interop:16.0.0-beta01] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\8424033a5c6a17c6bbcab7e9777cb908\jetified-firebase-appcheck-interop-16.0.0-beta01\AndroidManifest.xml:15:1-26:12
 MERGED from [com.google.firebase:firebase-common:20.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\cf44503f512bd01edbb9a42565c54f02\jetified-firebase-common-20.0.0\AndroidManifest.xml:15:1-40:12
 MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\e24c13c3491d3c2d10babd4c95cef1be\exifinterface-1.3.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.exoplayer:exoplayer-hls:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\c016094e7414faafcde508141bdc8b5a\jetified-exoplayer-hls-2.14.1\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.exoplayer:exoplayer-dash:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\49ba5e77249a8beada06942e89ad9e0a\jetified-exoplayer-dash-2.14.1\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\5deb12b417eef35bb8b3c863a3fbdcbd\jetified-exoplayer-smoothstreaming-2.14.1\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\c1c4759bf4faec9d213e6c751fbc8c3f\jetified-exoplayer-core-2.14.1\AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.media:media:1.1.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\efc4a77fc0227fcf5f282104e4873b15\media-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.core:core-ktx:1.3.2] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\40a04caaf3b595b2d58378ec150c3cef\jetified-core-ktx-1.3.2\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\6355bb52f1b64282d46485518152223a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:17:1-38:12
@@ -86,6 +91,8 @@ MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Samrie\.gradle\cache
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\0cf56f848314283f58e19650c67868da\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\dd6c95312e2e68fe95448252c329c692\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-components:17.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\48c68678fb2fdd1ecc0031ea410801a1\jetified-firebase-components-17.0.0\AndroidManifest.xml:15:1-23:12
+MERGED from [com.google.android.exoplayer:exoplayer-extractor:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\6454c4abb32fef7a1ffe31ba4a7d9f5f\jetified-exoplayer-extractor-2.14.1\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.exoplayer:exoplayer-common:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\23ed8a02109aa8a2dec3cea42b0ae398\jetified-exoplayer-common-2.14.1\AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\1595e054b2bd2c90c5423813879d9619\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
 MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\2ebfb026f9cdcbb544bc48708eefe8cc\jetified-transport-runtime-3.0.0\AndroidManifest.xml:15:1-41:12
 MERGED from [com.google.android.datatransport:transport-api:3.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\d2c5ab423225b7fdd085265ddcc04e2b\jetified-transport-api-3.0.0\AndroidManifest.xml:15:1-22:12
@@ -167,6 +174,8 @@ MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] C:\Use
 MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\9ffd7d0a6eddded2bb2cec8a91c6fbd4\jetified-play-services-measurement-api-20.0.2\AndroidManifest.xml:23:5-79
 MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\bfaa8387d061af9163bf78fbdd75ee7b\jetified-firebase-installations-17.0.0\AndroidManifest.xml:10:5-79
 MERGED from [com.google.firebase:firebase-installations:17.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\bfaa8387d061af9163bf78fbdd75ee7b\jetified-firebase-installations-17.0.0\AndroidManifest.xml:10:5-79
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\c1c4759bf4faec9d213e6c751fbc8c3f\jetified-exoplayer-core-2.14.1\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\c1c4759bf4faec9d213e6c751fbc8c3f\jetified-exoplayer-core-2.14.1\AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\6355bb52f1b64282d46485518152223a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\6355bb52f1b64282d46485518152223a\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
 MERGED from [com.google.android.gms:play-services-measurement:20.0.2] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\be0731b2a81262be3b91d4d07380739b\jetified-play-services-measurement-20.0.2\AndroidManifest.xml:24:5-79
@@ -177,6 +186,8 @@ MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] C:\Us
 MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\0d586b6a176c2f89aa997f35e0731e6e\jetified-play-services-measurement-impl-20.0.2\AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.2] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\e94d866a680a4fb315f0dc029bec41b9\jetified-play-services-measurement-sdk-api-20.0.2\AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.2] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\e94d866a680a4fb315f0dc029bec41b9\jetified-play-services-measurement-sdk-api-20.0.2\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.exoplayer:exoplayer-common:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\23ed8a02109aa8a2dec3cea42b0ae398\jetified-exoplayer-common-2.14.1\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.exoplayer:exoplayer-common:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\23ed8a02109aa8a2dec3cea42b0ae398\jetified-exoplayer-common-2.14.1\AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\2ebfb026f9cdcbb544bc48708eefe8cc\jetified-transport-runtime-3.0.0\AndroidManifest.xml:22:5-79
 MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\2ebfb026f9cdcbb544bc48708eefe8cc\jetified-transport-runtime-3.0.0\AndroidManifest.xml:22:5-79
 	android:name
@@ -353,10 +364,12 @@ MERGED from [:path_provider_android] D:\digiFrameflutter\educatednearby\build\pa
 MERGED from [:path_provider_android] D:\digiFrameflutter\educatednearby\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences_android] D:\digiFrameflutter\educatednearby\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences_android] D:\digiFrameflutter\educatednearby\build\shared_preferences_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:flutter_notification_channel] D:\digiFrameflutter\educatednearby\build\flutter_notification_channel\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:flutter_notification_channel] D:\digiFrameflutter\educatednearby\build\flutter_notification_channel\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:geocoding] D:\digiFrameflutter\educatednearby\build\geocoding\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:geocoding] D:\digiFrameflutter\educatednearby\build\geocoding\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:video_player] D:\digiFrameflutter\educatednearby\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:video_player] D:\digiFrameflutter\educatednearby\build\video_player\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_notification_channel] D:\digiFrameflutter\educatednearby\build\flutter_notification_channel\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_notification_channel] D:\digiFrameflutter\educatednearby\build\flutter_notification_channel\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:agora_rtc_engine] D:\digiFrameflutter\educatednearby\build\agora_rtc_engine\intermediates\library_manifest\debug\AndroidManifest.xml:6:5-8:41
 MERGED from [:agora_rtc_engine] D:\digiFrameflutter\educatednearby\build\agora_rtc_engine\intermediates\library_manifest\debug\AndroidManifest.xml:6:5-8:41
 MERGED from [:share_plus] D:\digiFrameflutter\educatednearby\build\share_plus\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
@@ -409,6 +422,14 @@ MERGED from [com.google.firebase:firebase-common:20.0.0] C:\Users\Samrie\.gradle
 MERGED from [com.google.firebase:firebase-common:20.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\cf44503f512bd01edbb9a42565c54f02\jetified-firebase-common-20.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\e24c13c3491d3c2d10babd4c95cef1be\exifinterface-1.3.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\e24c13c3491d3c2d10babd4c95cef1be\exifinterface-1.3.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-hls:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\c016094e7414faafcde508141bdc8b5a\jetified-exoplayer-hls-2.14.1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-hls:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\c016094e7414faafcde508141bdc8b5a\jetified-exoplayer-hls-2.14.1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-dash:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\49ba5e77249a8beada06942e89ad9e0a\jetified-exoplayer-dash-2.14.1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-dash:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\49ba5e77249a8beada06942e89ad9e0a\jetified-exoplayer-dash-2.14.1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\5deb12b417eef35bb8b3c863a3fbdcbd\jetified-exoplayer-smoothstreaming-2.14.1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\5deb12b417eef35bb8b3c863a3fbdcbd\jetified-exoplayer-smoothstreaming-2.14.1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\c1c4759bf4faec9d213e6c751fbc8c3f\jetified-exoplayer-core-2.14.1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\c1c4759bf4faec9d213e6c751fbc8c3f\jetified-exoplayer-core-2.14.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.media:media:1.1.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\efc4a77fc0227fcf5f282104e4873b15\media-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.media:media:1.1.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\efc4a77fc0227fcf5f282104e4873b15\media-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.core:core-ktx:1.3.2] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\40a04caaf3b595b2d58378ec150c3cef\jetified-core-ktx-1.3.2\AndroidManifest.xml:5:5-7:41
@@ -491,6 +512,10 @@ MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Samrie\.
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\dd6c95312e2e68fe95448252c329c692\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-components:17.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\48c68678fb2fdd1ecc0031ea410801a1\jetified-firebase-components-17.0.0\AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.firebase:firebase-components:17.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\48c68678fb2fdd1ecc0031ea410801a1\jetified-firebase-components-17.0.0\AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.exoplayer:exoplayer-extractor:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\6454c4abb32fef7a1ffe31ba4a7d9f5f\jetified-exoplayer-extractor-2.14.1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-extractor:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\6454c4abb32fef7a1ffe31ba4a7d9f5f\jetified-exoplayer-extractor-2.14.1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-common:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\23ed8a02109aa8a2dec3cea42b0ae398\jetified-exoplayer-common-2.14.1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.exoplayer:exoplayer-common:2.14.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\23ed8a02109aa8a2dec3cea42b0ae398\jetified-exoplayer-common-2.14.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\1595e054b2bd2c90c5423813879d9619\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\1595e054b2bd2c90c5423813879d9619\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] C:\Users\Samrie\.gradle\caches\transforms-2\files-2.1\2ebfb026f9cdcbb544bc48708eefe8cc\jetified-transport-runtime-3.0.0\AndroidManifest.xml:18:5-20:41

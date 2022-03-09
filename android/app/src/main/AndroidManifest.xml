@@ -12,6 +12,7 @@
 <uses-permission android:name="android.permission.BLUETOOTH" />
    <application
         android:label="متعلمون بالجوار"
+       android:usesCleartextTraffic="true"
         android:icon="@mipmap/educationlogo">
         <activity
             android:name=".MainActivity"

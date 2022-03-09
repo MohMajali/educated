@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:educatednearby/helper/sharedpredman.dart';
 import 'package:educatednearby/screens/navbar.dart';
+import 'package:educatednearby/screens/play_video.dart';
 import 'package:educatednearby/screens/service.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -29,9 +30,13 @@ class LoginAPI {
           int idFromJson = json['user']['id'];
           SharedPref.storeUserData(emailFromJson, nameFromJson, phoneFromJson,
               addressFromJson, idFromJson, imageFromJson);
+          // PlayVideo();
           Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (BuildContext context) => NavBar()),
+              MaterialPageRoute(builder: (BuildContext context) => PlayVideo()),
               (Route<dynamic> route) => false);
+          // Navigator.of(context).pushAndRemoveUntil(
+          //     MaterialPageRoute(builder: (BuildContext context) => NavBar()),
+          //     (Route<dynamic> route) => false);
           return Success(response: json['message'].toString());
         } else {
           Fluttertoast.showToast(
